@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: localhpatest-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: kubernetes.docker.internal
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: localhpatest
+            port: 
+              number: 8080

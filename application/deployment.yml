@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localhpatest
+  labels:
+    component: localhpatest
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      component: "localhpatest"
+  template:
+    metadata:
+      labels:
+        component: "localhpatest"
+    spec:
+      containers:
+        - name: localhpatest
+          image: "localhpatest:latest"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+          - name: http
+            containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits: 
+              cpu: "200m"
+              memory: "256Mi"
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: http
+            timeoutSeconds: 5
+            initialDelaySeconds: 2
+          readinessProbe:
+            failureThreshold: 1
+            httpGet:
+              path: /health
+              port: http
+            timeoutSeconds: 5
+            initialDelaySeconds: 2

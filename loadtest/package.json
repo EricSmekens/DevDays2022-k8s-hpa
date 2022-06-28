@@ -1,0 +1,15 @@
+{
+  "name": "loadtest",
+  "version": "1.0.0",
+  "description": "autocannon loadtest",
+  "main": "index.js",
+  "scripts": {
+    "load-test": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autocannon": "^7.9.0"
+  },
+  "type": "module"
+}
